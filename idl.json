@@ -1,0 +1,256 @@
+{
+  "version": "0.0.0",
+  "name": "xhashtag_campaign_contract",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "poolNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "createCampaign",
+      "accounts": [
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "rewardTokenDepositor",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardTokenVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardTokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "campaign",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolSigner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nonce",
+          "type": "u8"
+        },
+        {
+          "name": "poolNonce",
+          "type": "u8"
+        },
+        {
+          "name": "details",
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "submissionRequirement",
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "totalSubmissionRequired",
+          "type": "u64"
+        },
+        {
+          "name": "rewardAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "setActivationCampaign",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "campaign",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "activation",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "addSubmission",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "campaign",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Campaign",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "publicKey"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "details",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "submissionRequirement",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "totalSubmissionRequired",
+            "type": "u64"
+          },
+          {
+            "name": "rewardTokenMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "rewardTokenVault",
+            "type": "publicKey"
+          },
+          {
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "name": "currentSubmission",
+            "type": "u64"
+          },
+          {
+            "name": "rewardsStatus",
+            "type": "u8"
+          },
+          {
+            "name": "nonce",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "nonce",
+            "type": "u8"
+          },
+          {
+            "name": "lastUpdateTime",
+            "type": "u64"
+          },
+          {
+            "name": "campaignCount",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "NotEqual",
+      "msg": "Details and submission requirements counts is not equal."
+    }
+  ],
+  "metadata": {
+    "address": "DDps9VsNZXhff7Ng2Ew2wekyCzvQRiAYU4NoAjFzx3qV"
+  }
+}
